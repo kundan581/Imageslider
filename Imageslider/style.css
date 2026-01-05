@@ -1,0 +1,301 @@
+
+body{
+    margin: 0;                     /* Browser ka default margin remove */
+    background-color: #000;        /* Pure page ka background black */
+    color: #eee;                   /* Default text color light gray */
+    font-family: Poppins;          /* Font family set */
+    font-size: 12px;               /* Base font size */
+}
+
+a{
+    text-decoration: none;         /* Links ke underline remove */
+}
+
+/* ================= HEADER ================= */
+
+header{
+    width: 1140px;                 /* Fixed width for large screens */
+    max-width: 80%;                /* Responsive width */
+    margin: auto;                  /* Center align */
+    height: 50px;                  /* Header height */
+    display: flex;                 /* Flexbox layout */
+    align-items: center;           /* Vertically center items */
+    position: relative;            
+    z-index: 100;                  /* Slider ke upar rahe */
+}
+
+header a{
+    color: #eee;                   /* Nav link color */
+    margin-right: 5px;             /* Links ke beech space */
+    padding: 5px 10px;             /* Click area badhata hai */
+    transition: 0.2s;              /* Smooth hover effect */
+}
+
+a.active{
+    background: #14ff72cb;         /* Active link background */
+    border-radius: 2px;            /* Rounded corner */
+}
+
+header a:hover{
+    background: #14ff72cb;         /* Hover effect */
+    border-radius: 2px;
+}
+
+
+/* ================= SLIDER SECTION ================= */
+
+.slider{
+    height: 100vh;                 /* Full screen height */
+    margin-top: -50px;             /* Header ke niche overlap */
+    width: 100vw;                  /* Full viewport width */
+    overflow: hidden;              /* Extra content hide */
+    position: relative;
+}
+
+.slider .list .item{
+    width: 100%;
+    height: 100%;
+    position: absolute;            /* Sab slides ek ke upar ek */
+    inset: 0 0 0 0;                /* Top, right, bottom, left = 0 */
+}
+
+.slider .list .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;             /* Image crop without distortion */
+}
+
+/* Text content positioning */
+.slider .list .item .content{
+    position: absolute;
+    top: 20%;                      /* Image ke 20% niche */
+    width: 1140px;
+    max-width: 80%;
+    left: 50%;
+    transform: translateX(-50%);   /* Center align */
+    padding-right: 30%;            /* Text ko left side me rakhta hai */
+    box-sizing: border-box;
+    color: #fff;
+    text-shadow: 0 5px 10px #0004; /* Text shadow for readability */
+}
+
+/* Title & Type */
+.slider .list .item .content .title,
+.slider .list .item .content .type{
+    font-size: 5em;                /* Big heading */
+    font-weight: bold;
+    line-height: 1.3em;
+}
+
+.slider .list .item .type{
+    color: #14ff72cb;              /* Highlight color */
+}
+
+/* Buttons layout */
+.slider .list .item .button{
+    display: grid;                 
+    grid-template-columns: repeat(2, 130px);
+    grid-template-rows: 40px;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.slider .list .item .button button{
+    border: none;
+    background-color: #eee;
+    font-family: Poppins;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.4s;
+    letter-spacing: 2px;
+}
+
+.slider .list .item .button button:hover{
+    letter-spacing: 3px;           /* Hover pe spacing animation */
+}
+
+/* Second button styling */
+.slider .list .item .button button:nth-child(2){
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #eee;
+}
+
+
+/* ================= THUMBNAIL SECTION ================= */
+
+.thumbnail{
+    position: absolute;
+    bottom: 50px;                  
+    left: 50%;
+    width: max-content;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
+}
+
+.thumbnail .item{
+    width: 150px;
+    height: 220px;
+    flex-shrink: 0;                /* Size shrink na ho */
+    position: relative;
+}
+
+.thumbnail .item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ================= NEXT / PREV ARROWS ================= */
+
+.nextPrevArrows{
+    position: absolute;
+    top: 80%;
+    right: 52%;
+    z-index: 100;
+    width: 300px;
+    max-width: 30%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nextPrevArrows button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #14ff72cb;
+    border: none;
+    color: #fff;
+    font-family: monospace;
+    font-weight: bold;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.nextPrevArrows button:hover{
+    background-color: #fff;
+    color: #000;
+}
+
+
+/* ================= ANIMATION PART ================= */
+
+/* First slide sabse upar rahe */
+.slider .list .item:nth-child(1){
+    z-index: 1;
+}
+
+/* First slide ke text ka entry animation */
+.slider .list .item:nth-child(1) .content .title,
+.slider .list .item:nth-child(1) .content .type,
+.slider .list .item:nth-child(1) .content .description,
+.slider .list .item:nth-child(1) .content .buttons{
+    transform: translateY(50px);   /* Neeche se aata hua */
+    filter: blur(20px);            
+    opacity: 0;
+    animation: showContent .5s 1s linear 1 forwards;
+}
+
+/* Text reveal animation */
+@keyframes showContent{
+    to{
+        transform: translateY(0);
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+/* Staggered animation delay */
+.slider .list .item:nth-child(1) .content .title{
+    animation-delay: 0.4s !important;
+}
+.slider .list .item:nth-child(1) .content .type{
+    animation-delay: 0.6s !important;
+}
+.slider .list .item:nth-child(1) .content .description{
+    animation-delay: 0.8s !important;
+}
+.slider .list .item:nth-child(1) .content .buttons{
+    animation-delay: 1s !important;
+}
+
+
+/* ================= NEXT BUTTON ANIMATION ================= */
+
+.slider.next .list .item:nth-child(1) img{
+    width: 150px;
+    height: 220px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    border-radius: 30px;
+    animation: showImage .5s linear 1 forwards;
+}
+
+/* Thumbnail se full image animation */
+@keyframes showImage{
+    to{
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}
+
+
+/* ================= PREV BUTTON ANIMATION ================= */
+
+.slider.prev .list .item:nth-child(2) img{
+    animation: outFrame 0.5s linear 1 forwards;
+    position: absolute;
+}
+
+/* Full image se thumbnail banne ka effect */
+@keyframes outFrame{
+    to{
+        width: 150px;
+        height: 220px;
+        bottom: 50px;
+        left: 50%;
+        border-radius: 20px;
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media screen and (max-width: 678px) {
+    .slider .list .item .content{
+        padding-right: 0;
+    }
+    .slider .list .item .content .title{
+        font-size: 50px;
+    }
+}
+
+
+#about {
+    padding: 50px;
+    text-align: center;
+}
+
+.social-links a {
+    margin: 0 10px;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+.social-links img {
+    width: 40px;
+    height: 40px;
+}
